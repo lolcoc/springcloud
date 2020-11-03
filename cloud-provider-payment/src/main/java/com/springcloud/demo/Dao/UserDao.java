@@ -9,29 +9,31 @@ import java.util.List;
 /**
  * @Author: dq
  * @Date: 2020/11/3 13:23
- * @Description: 数据库操作实体类demo
+ * @Description: 用户数据库操作类
  */
 @Repository
-public class DemoDao extends BaseDao {
+public class UserDao extends BaseDao {
 
     /**
      * 保存用户
-     *
      * @param user
+     * @return
      */
-    public void save(User user) {
+    public Integer save(User user) {
         String sql = "insert into sys_user(id, userName, passWord) values(?,?,?)";
-        jdbcTemplate.update(sql, user.getId(), user.getUserName(), user.getPassWord());
+        Integer count = jdbcTemplate.update(sql, user.getId(), user.getUserName(), user.getPassWord());
+        return count;
     }
 
     /**
      * 删除用户
-     *
      * @param id
+     * @return
      */
-    public void delete(String id) {
+    public Integer delete(String id) {
         String sql = "delete from sys_user where id=?";
-        jdbcTemplate.update(sql, id);
+        Integer count = jdbcTemplate.update(sql, id);
+        return count;
     }
 
     /**
