@@ -4,9 +4,9 @@ import com.springcloud.demo.entity.User;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 
-@FeignClient(name="CLOUD-PROVIDER-USER")
+@FeignClient(value="CLOUD-PROVIDER-USER")
 public interface UserService {
 
-    @PostMapping("/save")
+    @PostMapping("/user/save")
     void save(User user);
 }
