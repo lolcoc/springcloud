@@ -4,9 +4,12 @@ import com.springcloud.demo.entity.User;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@FeignClient(value="CLOUD-PROVIDER-USER")
+@FeignClient(value = "CLOUD-PROVIDER-USER")
 public interface UserService {
 
     @RequestMapping("/user/save")
     void save(User user);
+
+    @RequestMapping("/user/find")
+    void findAll();
 }

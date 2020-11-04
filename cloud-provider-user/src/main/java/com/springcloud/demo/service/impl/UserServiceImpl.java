@@ -16,4 +16,9 @@ public class UserServiceImpl implements UserService {
     public void save(com.springcloud.demo.entity.User user) {
         userDao.save(user);
     }
+
+    @Override
+    public void findAll() {
+        System.out.println("-------------------------->>>>>>>>>>");
+    }
 }

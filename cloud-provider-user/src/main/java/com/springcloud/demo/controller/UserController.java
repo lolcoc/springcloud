@@ -38,4 +38,21 @@ public class UserController {
         return resultMap;
 
     }
+
+    /**
+     * 查询
+     * @param
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/find")
+    public Map<String, Object> findAll() {
+
+        System.out.println("1111111111");
+
+        Map<String, Object> resultMap = new HashMap<>(16);
+        userService.findAll();
+        return resultMap;
+
+    }
 }

@@ -5,4 +5,6 @@ import com.springcloud.demo.entity.User;
 public interface UserService {
 
     void save(User user);
+
+    void findAll();
 }
