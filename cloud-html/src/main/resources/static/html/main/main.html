@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>漂流瓶空间</title>
+
+    <link rel="stylesheet" href="/css/main/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/main/templatemo-style.css">
+</head>
+
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <header class="text-center tm-site-header">
+                <div class="tm-site-logo"></div>
+                <h1 id="nickName" class="pl-4 tm-site-title"></h1>
+            </header>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="tm-video-container">
+                <video id="tm-welcome-video" class="tm-welcome-video" autoplay loop muted>
+                    <source src="/videos/video.mp4" type="video/mp4">
+                    您的浏览器暂不支持播放视频.
+                </video>
+                <div id="tm-video-loader"></div>
+                <div id="tm-video-text-overlay" class="tm-video-text-overlay d-none">
+                    <h1>
+                        <div id="rotate" class="tm-video-text">
+
+                        </div>
+                    </h1>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container tm-container-2">
+    <!--<hr>-->
+    <!--&lt;!&ndash;  row &ndash;&gt;-->
+    <!--<div class="row tm-section-mb">-->
+        <!--<div class="col-lg-12">-->
+            <!--<h3 class="mb-4 tm-text-gray">扔一只新的漂流瓶吧</h3>-->
+            <!--<div class="row">-->
+                <!--<div class="form-group col-xl-6">-->
+                    <!--<input type="text" id="infoTitle" name="infoTitle" class="form-control" placeholder="瓶子名称..." required/>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="form-group">-->
+                <!--<textarea id="infoText" name="contact_message" class="form-control" rows="6"-->
+                          <!--placeholder="说出你的心里话..." required></textarea>-->
+            <!--</div>-->
+            <!--<div style="text-align: right">-->
+                <!--<button class="btn  tm-btn-send" onclick="saveInfo()">丢出去</button>-->
+            <!--</div>-->
+
+        <!--</div>-->
+    <!--</div>-->
+    <hr>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="tm-welcome-text">来捡一只漂流瓶吧！</h2>
+            <h5 class="tm-welcome-text—info">---你可以在这里找到所有的心声，酸甜，梦想与苦辣....</h5>
+            <h2 class="tm-welcome-text">来碰个运气吧！</h2>
+            <h5 class="tm-welcome-text—info">---或许你今年就在这里脱单了呢....</h5>
+        </div>
+    </div>
+    <div class="row tm-section-mb">
+        <div id="infoList" class="col-lg-12">
+        </div>
+    </div>
+    <hr>
+    <!-- Footer -->
+    <footer class="row mt-5 mb-5">
+        <div class="col-lg-12">
+            <p class="text-center tm-text-gray tm-copyright-text mb-0">Copyright &copy;
+                <span class="tm-current-year">2018</span> 小七&nbsp;
+                | &nbsp;作者: 小七 &nbsp;&nbsp;&nbsp;微信&电话 - 17835054246
+            </p>
+        </div>
+    </footer>
+</div>
+
+<script src="/js/public/jquery-1.11.2.min.js"></script>
+<script src="/js/main/templatemo-script.js"></script>
+<script src="/js/layer/layer.js"></script>
+
+<script>
+    $(function () {
+        //加载用户信息
+        getUserInfo();
+        //加载首页随机信息
+        getInfoList();
+    });
+
+    /**
+     * 获取用户首页信息
+     */
+    function getUserInfo() {
+        //请求数据
+        $.ajax({
+            url: '/user/userInfo',
+            type: 'post',
+            data: {},
+            // contentType: "application/json",
+            success: function (res) {
+                if (res.status == 'loginError') {
+                    window.location.href = '../login/index.html';
+                } else {
+                    var user = res.user;
+                    $('#nickName').text(user.nickName);
+                    $('#trueName').text(user.trueName);
+                }
+            }
+        });
+    }
+
+    /**
+     * 获取主体信息列表
+     */
+    function getInfoList() {
+
+        $('#infoList').empty();
+
+        //请求数据
+        $.ajax({
+            url: '/info/infoList',
+            type: 'get',
+            data: {},
+            // contentType: "application/json",
+            success: function (res) {
+                if (res.status == 'loginError') {
+                    window.location.href = '../login/index.html';
+                } else {
+                    console.log(res);
+                    var infoList = res.infoList;
+                    //容器
+                    var divStr = '';
+                    //循环拼接
+                    for (var i = 0; i < infoList.length; i++) {
+
+                        var info = infoList[i];
+
+                        divStr += '<div class=" tm-timeline-item"> <div class="tm-timeline-item-inner"> ';
+                        //头像配置
+                        divStr += '<img src="/images/user/'+info.createUserIcon+'" alt="Image" class="rounded-circle tm-img-timeline"> ';
+                        divStr += '<div class="tm-timeline-connector">  <p class="mb-0">&nbsp;</p> </div> ';
+                        divStr += '<div class="tm-timeline-description-wrap"><div class="tm-bg-dark tm-timeline-description">';
+                        divStr += '<h3 class="tm-text-green tm-font-400">' + info.infoTitle + '</h3> ';
+                        divStr += '<p>' + info.infoText + '</p> ';
+                        divStr += '<p class="tm-text-green float-right mb-0">' + info.createNickName +'&nbsp;&nbsp;&nbsp;'+ info.viewTime+'</p>';
+                        divStr += '</div></div></div> ';
+                        divStr += ' <div class="tm-timeline-connector-vertical"></div></div>';
+                    }
+                    //放入页面
+                    $('#infoList').append(divStr);
+                }
+            }
+        });
+    }
+
+    /**
+     * 保存新消息
+     */
+    function saveInfo() {
+
+        //拿到标题数据
+        var infoTitle = $('#infoTitle').val();
+        if (infoTitle == '') {
+            //文本域判空
+            layer.alert('<p style="color:black"><b>您还没有输入标题呢！</b></p>', {icon: 0});
+            return;
+        }
+
+        //拿到文本域数据
+        var infoText = $('#infoText').val();
+        if (infoText == '') {
+            //文本域判空
+            layer.alert('<p style="color:black"><b>您还没有输入心里话呢！</b></p>', {icon: 0});
+            return;
+        }
+
+        //请求数据
+        $.ajax({
+            url: '/info/saveInfo',
+            type: 'post',
+            data: {
+                infoTitle:infoTitle,
+                infoText:infoText
+            },
+            // contentType: "application/json",
+            success: function (res) {
+                if (res.status == 'loginError') {
+                    window.location.href = '../login/index.html';
+                } else {
+                    if (res.status == 'ok'){
+                        getInfoList();
+                    }else {
+                        //发表失败
+                        layer.alert('<p style="color:black"><b>发表失败请刷新网页重试！</b></p>', {icon: 2});
+                    }
+                }
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

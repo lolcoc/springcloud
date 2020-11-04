@@ -13,6 +13,7 @@
         <module>cloud-provider-user</module>
         <module>cloud-controller-user</module>
         <module>cloud-provider-eureka</module>
+        <module>cloud-html</module>
     </modules>
 
     <properties>

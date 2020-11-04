@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>欢迎注册</title>
+
+    <link rel="stylesheet" href="/css/main/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/main/templatemo-style.css">
+</head>
+
+<body>
+
+
+<div class="container tm-container-2">
+    <div class="row">
+        <div class="col-lg-12">
+            <header class="text-center tm-site-header">
+                <div class="tm-site-logo"></div>
+                <h1 class="pl-4 tm-site-title">欢迎新用户</h1>
+            </header>
+        </div>
+    </div>
+    <hr>
+    <!--  row -->
+    <div class="row tm-section-mb">
+        <div class="col-lg-12">
+            <h3 class="mb-4 tm-text-gray">用户名----------</h3>
+            <div class="row">
+                <div class="form-group col-xl-12">
+                    <input type="text" id="userName" name="userName" class="form-control" placeholder="用户名..."
+                           onkeyup="userNameCheck(event)" maxlength="20" required/>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <h3 class="mb-4 tm-text-gray" style="text-align: right">----------昵称</h3>
+            <div class="row">
+                <div class="form-group col-xl-12">
+                    <input type="text" id="nickName" name="nickName" class="form-control" placeholder="昵称..."
+                           maxlength="10" required/>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <h3 class="mb-4 tm-text-gray">密码----------</h3>
+            <div class="row">
+                <div class="form-group col-xl-12">
+                    <input type="password" id="userPass" name="userPass" class="form-control" placeholder="密码..."
+                           onkeyup="userPassCheck(event)" maxlength="20" required/>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <h3 class="mb-4 tm-text-gray" style="text-align: right">----------确认密码</h3>
+            <div class="row">
+                <div class="form-group col-xl-12">
+                    <input type="password" id="userRePass" name="userRePass" class="form-control" placeholder="确认密码..."
+                           onkeyup="userRePassCheck(event)" maxlength="20" required/>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div style="text-align: right">
+                <button id="saveButton" class="btn  tm-btn-send" onclick="saveButtonOnClick()">注册</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/js/public/jquery-1.11.2.min.js"></script>
+<script src="/js/layer/layer.js"></script>
+
+<script>
+    $(function () {
+
+    });
+
+    /**
+     * 帐号校验
+     */
+    function userNameCheck(e) {
+        var userName = e.target.value;
+        //帐号正则
+        var userCheck = /[a-zA-Z][a-zA-Z0-9_]{4,15}$/;
+        //校验正则
+        if (!userCheck.test(userName)) {
+            layer.tips('用户名必须在5~16位之间,且必须是英文字母开头，只允许字母、数字和下划线', '#userName', {
+                tips: 3,
+                time: 1000
+            });
+            $("#nextButton").attr('disabled', true);
+        } else {
+            //校验用户名存在
+            $.ajax({
+                url: '/user/checkUserName',
+                type: 'post',
+                cache: false,
+                data: {
+                    "userName": userName
+                },
+                async: false,
+                // contentType: "application/json",
+                success: function (res) {
+                    if (res.status == 'ok') {
+                        layer.tips('该用户名已存在！', '#userName', {
+                            tips: 3,
+                            time: 1000
+                        });
+                        $("#saveButton").attr('disabled', true);
+                    } else {
+                        layer.tips('可用的用户名', '#userName', {
+                            tips: 3,
+                            time: 1000
+                        });
+                        $("#saveButton").attr('disabled', false);
+                    }
+                }
+            });
+        }
+    }
+
+
+    /**
+     * 密码校验
+     */
+    function userPassCheck(e) {
+        var userPass = e.target.value;
+        //帐号正则
+        var passCheck = /^[a-zA-Z]\w{5,17}$/;
+        //校验正则
+        if (!passCheck.test(userPass)) {
+            layer.tips('密码必须以字母开头，长度在6~18位之间，只能包含字母、数字和下划线', '#userPass', {
+                tips: 3,
+                time: 1000
+            });
+            $("#saveButton").attr('disabled', true);
+        } else {
+            $("#saveButton").attr('disabled', false);
+        }
+    }
+
+    /**
+     * 重复密码校验
+     */
+    function userRePassCheck(e) {
+        var userRePass = e.target.value;
+
+        var userPass = $("#userPass").val();
+
+        //校验两次密码
+        if (userRePass != userPass) {
+            layer.tips('两次输入密码不一致！', '#userRePass', {
+                tips: 3,
+                time: 1000
+            });
+            $("#saveButton").attr('disabled', true);
+        } else {
+            $("#saveButton").attr('disabled', false);
+        }
+    }
+
+    /**
+     * 点击注册
+     */
+    function saveButtonOnClick() {
+        //先校验昵称可用
+        var nickName = $("#nickName").val();
+        var userPass = $("#userPass").val();
+        var userName = $("#userName").val();
+
+        if (userName == '') {
+            layer.tips('请填写用户名', '#userName', {
+                tips: 3,
+                time: 1000
+            });
+            return;
+        } else if (userPass == '') {
+            layer.tips('请填写密码', '#userPass', {
+                tips: 3,
+                time: 1000
+            });
+            return;
+        } else if (nickName == '') {
+            layer.tips('请填写昵称', '#nickName', {
+                tips: 3,
+                time: 1000
+            });
+            return;
+        }
+
+        $.ajax({
+            url: '/user/checkNickName',
+            type: 'post',
+            data: {
+                "nickName": nickName
+            },
+            // contentType: "application/json",
+            success: function (res) {
+                if (res.status == 'ok') {
+                    layer.msg('该昵称已存在！请修改后重试', {icon: 5});
+                    return;
+                } else {
+                    layer.confirm('<p style="color:black"><b>确认要注册 ' + nickName + ' 该用户吗？</b></p>', {
+                        btn: ['确定', '<p style="color:black">取消</p>']
+                    }, function (index) {
+                        layer.close(index);
+                        //请求数据
+                        $.ajax({
+                            url: '/user/saveNewUser',
+                            type: 'post',
+                            data: {
+                                userName: userName,
+                                userPass: userPass,
+                                nickName: nickName
+                            },
+                            // contentType: "application/json",
+                            success: function (res) {
+                                if (res.status == 'ok') {
+                                    layer.msg('注册成功！正在跳转登录页...');
+                                    setTimeout("hrefLogin()", 2000);
+                                } else {
+                                    layer.msg('注册失败！请刷新页面重试...');
+                                    layer.load(2);
+                                    setTimeout("hrefRegister()", 2000);
+                                }
+                            }
+                        });
+                    });
+                }
+            }
+        });
+    }
+
+    /**
+     * 跳转登录
+     */
+    function hrefLogin() {
+        window.location.href = '../login/index.html';
+    }
+
+    /**
+     * 跳转注册
+     */
+    function hrefRegister() {
+        window.location.href = '../user/register.html';
+    }
+</script>
+
+</body>
+</html>
