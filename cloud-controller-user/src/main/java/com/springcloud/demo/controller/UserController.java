@@ -1,14 +1,16 @@
 package com.springcloud.demo.controller;
 
+import com.springcloud.demo.entity.User;
+import com.springcloud.demo.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -22,6 +24,8 @@ import java.util.Map;
 public class UserController {
 
 
+    @Resource
+    private UserService userService;
     /**
      * 保存
      * @param
@@ -29,16 +33,9 @@ public class UserController {
      */
     @ResponseBody
     @RequestMapping("/save")
-    public Map<String, Object> save() {
+    public Map<String, Object> save(@PathVariable("user") User user) {
         Map<String, Object> resultMap = new HashMap();
-        /*List<String> services = discoveryClient.getServices();
-        resultMap.put("success",services.get(0));*/
-        return resultMap;
-       /* Map<String, Object> resultMap = new HashMap<>(16);
-
         userService.save(user);
-
-        return resultMap;*/
-
+        return resultMap;
     }
 }
