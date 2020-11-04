@@ -1,5 +1,5 @@
 server:
-  port: 9001
+  port: 8001
 
 spring:
   datasource:
@@ -8,14 +8,10 @@ spring:
     password: 123456
     driverClassName: com.alibaba.druid.proxy.DruidDriver
 
-  application:
-    name: consul-provider-user
-  ###consul注册中心地址
-  cloud:
-    consul:
-      host: localhost
-      port: 8500
-      discovery:
-        #hostname: 127.0.0.1
-        service-name: ${spring.application.name}
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:9000/eureka
 
