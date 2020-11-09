@@ -20,6 +20,32 @@ public class User {
      * 密码
      */
     private String passWord;
+    /**
+     * 身份证号
+     */
+    private String IDCard;
+
+    /**
+     * 手机号
+     * @return
+     */
+    private String phoneNumber;
+
+    public String getIDCard() {
+        return IDCard;
+    }
+
+    public void setIDCard(String IDCard) {
+        this.IDCard = IDCard;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
     public Integer getId() {
         return id;
