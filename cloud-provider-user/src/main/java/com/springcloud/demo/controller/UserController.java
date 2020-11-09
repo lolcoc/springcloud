@@ -79,6 +79,14 @@ public class UserController {
     }
 
 
+    /**
+     * 注册
+     * @param IDCard
+     * @param phoneNumber
+     * @param userName
+     * @param passWord
+     * @return
+     */
     @RequestMapping("/register")
     public Map<String, Object> register(String IDCard, String phoneNumber ,String userName, String passWord) {
         Map<String, Object> resultMap = new HashMap<>(16);
