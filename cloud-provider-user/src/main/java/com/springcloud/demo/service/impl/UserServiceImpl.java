@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void findAll() {
-        System.out.println("-------------------------->>>>>>>>>>");
+        System.out.println("-------------------------->>>>>>>>>>service");
     }
 
     @Override

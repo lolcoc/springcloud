@@ -46,7 +46,7 @@ public class UserController {
     @RequestMapping("/find")
     public Map<String, Object> findAll() {
 
-        System.out.println("1111111111");
+        System.out.println("------>provider");
 
         Map<String, Object> resultMap = new HashMap<>(16);
         userService.findAll();
