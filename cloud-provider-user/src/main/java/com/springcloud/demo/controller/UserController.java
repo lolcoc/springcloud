@@ -3,7 +3,6 @@ package com.springcloud.demo.controller;
 import com.springcloud.demo.entity.User;
 import com.springcloud.demo.service.UserService;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
