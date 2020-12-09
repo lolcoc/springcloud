@@ -14,6 +14,7 @@
         <module>cloud-controller-user</module>
         <module>cloud-provider-eureka</module>
         <module>cloud-html</module>
+        <module>cloud-activemq-producer</module>
     </modules>
 
     <properties>

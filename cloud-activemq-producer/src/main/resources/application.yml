@@ -1,0 +1,18 @@
+server:
+  port: 8003
+#eureka:
+#  client:
+#    register-with-eureka: true
+#    fetch-registry: true
+#    service-url:
+#      defaultZone: http://localhost:9000/eureka
+spring:
+  application:
+    name: cloud-activemq-producer
+  activemq:
+    broker-url: tcp://172.16.21.156:61616
+    in-memory: true
+    user: admin
+    password: admin
+  jms:
+    pub-sub-domain: false #默认情况下activemq提供的是queue模式，若要使用topic模式需要配置pub-sub-domain为true
