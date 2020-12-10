@@ -9,10 +9,11 @@ server:
 spring:
   application:
     name: cloud-activemq-producer
-  activemq:
-    broker-url: tcp://172.16.21.156:61616
-    in-memory: true
-    user: admin
-    password: admin
+#  activemq:
+#    broker-url: failover:(tcp://172.16.21.156:61616,tcp://172.16.21.157:61616,tcp://172.16.21.158:61616)?randomize=false
+#    in-memory: true
+#    user: admin
+#    password: admin
+#    sessioncachesize: 20
   jms:
     pub-sub-domain: false #默认情况下activemq提供的是queue模式，若要使用topic模式需要配置pub-sub-domain为true

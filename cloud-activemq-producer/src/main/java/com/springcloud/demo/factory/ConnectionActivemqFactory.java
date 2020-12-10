@@ -7,7 +7,8 @@ import org.springframework.jms.connection.CachingConnectionFactory;
 import javax.jms.ConnectionFactory;
 
 public class ConnectionActivemqFactory {
-    private static final String URL = "tcp://172.16.21.156:61616";
+
+    private  static final String URL  = "failover:(tcp://172.16.21.156:61616,tcp://172.16.21.157:61616,tcp://172.16.21.158:61616)";
     private static final String USERNAME = "admin";
     private static final String PASSWORD = "admin";
     private static final int SESSIONCACHESIZE = 20;
