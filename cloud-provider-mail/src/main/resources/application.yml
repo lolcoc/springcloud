@@ -1,0 +1,8 @@
+server:
+  port: 8004
+spring:
+  application:
+    name: cloud-provider-mail
+  cloud:
+    zookeeper:
+      connect-string: 172.16.21.156:2181,172.16.21.156:2181,172.16.21.156:2181
