@@ -23,25 +23,20 @@ public class ActiveMqProducer{
      * 生产者 发布消息
      * @throws
      */
-    @RequestMapping("/start")
-    @ResponseBody
-    public void testSendMessage() throws InterruptedException {
-        for (int idx = 1; idx < 1000000; idx++) {
-
+    @RequestMapping("/send")
+    public void sendMessage(String msg) throws InterruptedException {
             //生产者 发布 消息到 queue/queue_b 的队列中
-            JMSPublisher.sendQueueMessage("queue/queue_b", String.valueOf(idx));
+            JMSPublisher.sendQueueMessage("queue_queue_b", msg);
 
             // 生产者 发布消息 到  topic/send 的Topic 主题中
             //JMSPublisher.sendTopicMessage("topic/send", String.valueOf(idx * 1111));
-        }
     }
 
 
     /**
      * 消费者 订阅接受消息
      */
-    @RequestMapping("/stop")
-    @ResponseBody
+    @RequestMapping("/receiver")
     public void receiver() {
 
         //消费者 订阅主题  topic/send 是否有消息发布，有侧打印出来  （通过 onMessage 监听）
@@ -59,7 +54,7 @@ public class ActiveMqProducer{
             }
         });*/
 
-        //消费者 订阅队列  queue/queue_b 是否有消息发布，有侧打印出来  （通过 onMessage 监听）
+        //消费者 订阅队列  queue/queue_b 是否有消息发布，有则打印出来  （通过 onMessage 监听）
         List list = new ArrayList();
         JMSListener.startJmsQueueListener("queue/queue_b" ,new MessageListener() {
             @Override

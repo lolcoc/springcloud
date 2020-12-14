@@ -24,8 +24,8 @@ public class UserDao extends BaseDao {
      * @return
      */
     public Integer save(User user) {
-        String sql = "insert into sys_user(id, userName, passWord) values(?,?,?)";
-        Integer count = jdbcTemplate.update(sql, user.getId(), user.getUserName(), user.getPassWord());
+        String sql = "insert into sys_user( id, userName, passWord, IDCard, phoneNumber) values(?,?,?,?,?)";
+        Integer count = jdbcTemplate.update(sql, user.getId(), user.getUserName(), user.getPassWord(), user.getIDCard(), user.getPhoneNumber());
         return count;
     }
 

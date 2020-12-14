@@ -2,12 +2,12 @@ package com.springcloud.demo.controller;
 
 import com.springcloud.demo.entity.User;
 import com.springcloud.demo.service.UserService;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
@@ -31,9 +31,13 @@ public class UserController {
      * @param
      * @return
      */
+    @ApiOperation(value = "保存用户")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "user", value = "user", required = true, dataType = "User")
+    })
     @ResponseBody
-    @RequestMapping("/save")
-    public Map<String, Object> save(@PathVariable("user") User user) {
+    @RequestMapping(value = "/save" ,method = RequestMethod.POST)
+    public Map<String, Object> save(@RequestBody User user) {
         Map<String, Object> resultMap = new HashMap();
         userService.save(user);
         return resultMap;
@@ -44,8 +48,9 @@ public class UserController {
      * @param
      * @return
      */
+    @ApiOperation(value = "查询所有用户")
     @ResponseBody
-    @RequestMapping("/find")
+    @RequestMapping(value = "/find" ,method = RequestMethod.GET)
     public Map<String, Object> findAll() {
 
         System.out.println("------->>user");
