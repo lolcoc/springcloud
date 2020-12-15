@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -33,7 +34,7 @@ public class UserController {
      */
     @ApiOperation(value = "保存用户")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "user", value = "user", required = true, dataType = "User")
+            @ApiImplicitParam(name = "user", value = "用户", required = true, dataType = "User")
     })
     @ResponseBody
     @RequestMapping(value = "/save" ,method = RequestMethod.POST)
@@ -51,13 +52,7 @@ public class UserController {
     @ApiOperation(value = "查询所有用户")
     @ResponseBody
     @RequestMapping(value = "/find" ,method = RequestMethod.GET)
-    public Map<String, Object> findAll() {
-
-        System.out.println("------->>user");
-
-        Map<String, Object> resultMap = new HashMap<>(16);
-        userService.findAll();
-        return resultMap;
-
+    public String findAll() {
+        return userService.findAll();
     }
 }

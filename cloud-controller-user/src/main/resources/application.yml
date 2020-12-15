@@ -4,4 +4,4 @@ eureka:
   client:
     register-with-eureka: false
     service-url:
-      defaultZone: Http://localhost:9000/eureka/
+      defaultZone: Http://127.0.0.1:9000/eureka/

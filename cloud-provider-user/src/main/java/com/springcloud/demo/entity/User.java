@@ -1,11 +1,14 @@
 package com.springcloud.demo.entity;
 
+import java.io.Serializable;
+
 /**
  * @Author: dq
  * @Date: 2020/11/3 13:23
  * @Description: 用户
  */
-public class User {
+public class User implements Serializable {
+    private static final long serialVersionUID = 1851709879951162609L;
     /**
      * id
      */

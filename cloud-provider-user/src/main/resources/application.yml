@@ -5,16 +5,21 @@ spring:
   application:
     name: cloud-provider-user
   datasource:
-#    url: jdbc:mysql://localhost:3306/springboot?useUnicode=true&zeroDateTimeBehavior=convertToNull&autoReconnect=true&characterEncoding=utf-8
     url: jdbc:mysql://172.16.21.159:3306/springboot?useUnicode=true&zeroDateTimeBehavior=convertToNull&autoReconnect=true&characterEncoding=utf-8
+#    url: jdbc:mysql://localhost:3306/springboot?useUnicode=true&zeroDateTimeBehavior=convertToNull&autoReconnect=true&characterEncoding=utf-8
     username: root
     password: 123456
-    driverClassName: com.alibaba.druid.proxy.DruidDriver
+    driverClassName: com.mysql.jdbc.Driver
+#    initialSize: 10
+#    minIdle: 10
+#    maxActive: 20
+#    maxWait: 60000
+
 
 eureka:
   client:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: http://localhost:9000/eureka
+      defaultZone: http://127.0.0.1:9000/eureka
 

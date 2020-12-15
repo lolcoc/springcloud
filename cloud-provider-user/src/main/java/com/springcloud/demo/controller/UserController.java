@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -48,7 +49,8 @@ public class UserController {
         System.out.println("------>provider");
 
         Map<String, Object> resultMap = new HashMap<>(16);
-        userService.findAll();
+        List<User> list = userService.findAll();
+        resultMap.put("list",list);
         return resultMap;
 
     }

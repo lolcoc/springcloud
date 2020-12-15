@@ -7,6 +7,8 @@ import com.springcloud.demo.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -19,8 +21,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void findAll() {
-        System.out.println("-------------------------->>>>>>>>>>service");
+    public List<User> findAll() {
+        return userDao.findAll();
     }
 
     @Override

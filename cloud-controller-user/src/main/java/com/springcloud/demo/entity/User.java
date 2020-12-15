@@ -1,7 +1,10 @@
 package com.springcloud.demo.entity;
 
-public class User {
+import java.io.Serializable;
 
+public class User implements Serializable {
+
+    private static final long serialVersionUID = -8904658598167618102L;
     /**
      * 同户名
      */

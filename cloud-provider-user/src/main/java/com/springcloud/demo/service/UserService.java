@@ -2,11 +2,13 @@ package com.springcloud.demo.service;
 
 import com.springcloud.demo.entity.User;
 
+import java.util.List;
+
 public interface UserService {
 
     void save(User user);
 
-    void findAll();
+    List<User> findAll();
 
     User selectUserByName(String userName);
 
