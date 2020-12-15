@@ -24,7 +24,7 @@ public class UserDao extends BaseDao {
      * @return
      */
     public Integer save(User user) {
-        String sql = "insert into sys_user( id, userName, passWord, IDCard, phoneNumber) values(?,?,?,?,?)";
+        String sql = "insert into user( id, user_name, pass_word, id_card, phone_number) values(?,?,?,?,?)";
         Integer count = jdbcTemplate.update(sql, user.getId(), user.getUserName(), user.getPassWord(), user.getIDCard(), user.getPhoneNumber());
         return count;
     }
@@ -35,7 +35,7 @@ public class UserDao extends BaseDao {
      * @return
      */
     public Integer delete(String id) {
-        String sql = "delete from sys_user where id=?";
+        String sql = "delete from user where id=?";
         Integer count = jdbcTemplate.update(sql, id);
         return count;
     }
@@ -56,7 +56,7 @@ public class UserDao extends BaseDao {
      * @return
      */
     public User selectUserByName(String userName) {
-        String sql = "select * from sys_user where user_name like ?";
+        String sql = "select * from user where user_name like ?";
         return jdbcTemplate.query(sql, new ResultSetExtractor<User>() {
             @Override
             public User extractData(ResultSet rs) throws SQLException, DataAccessException {
@@ -74,7 +74,7 @@ public class UserDao extends BaseDao {
     }
 
     public User selectUserByIDCard(String idCard) {
-        String sql = "select * from sys_user where user_name like ?";
+        String sql = "select * from user where user_name like ?";
         return jdbcTemplate.query(sql, new ResultSetExtractor<User>() {
             @Override
             public User extractData(ResultSet rs) throws SQLException, DataAccessException {
@@ -88,7 +88,7 @@ public class UserDao extends BaseDao {
     }
 
     public User selectUserByphoneNumber(String phoneNumber) {
-        String sql = "select * from sys_user where user_name like ?";
+        String sql = "select * from user where user_name like ?";
         return jdbcTemplate.query(sql, new ResultSetExtractor<User>() {
             @Override
             public User extractData(ResultSet rs) throws SQLException, DataAccessException {

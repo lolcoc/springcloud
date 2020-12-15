@@ -2,8 +2,7 @@ package com.springcloud.demo.controller;
 
 import com.springcloud.demo.entity.User;
 import com.springcloud.demo.service.UserService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
@@ -27,11 +26,12 @@ public class UserController {
      * @param user
      * @return
      */
-    @RequestMapping("/save")
-    public Map<String, Object> save(User user) {
+    @ResponseBody
+    @RequestMapping(value = "/save",method = RequestMethod.POST)
+    public Map<String, Object> save(@RequestBody User user) {
 
         Map<String, Object> resultMap = new HashMap<>(16);
-
+        System.out.println(user.getUserName());
         userService.save(user);
 
         return resultMap;

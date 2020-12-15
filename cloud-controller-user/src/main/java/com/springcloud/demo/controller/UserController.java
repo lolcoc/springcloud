@@ -40,6 +40,7 @@ public class UserController {
     @RequestMapping(value = "/save" ,method = RequestMethod.POST)
     public Map<String, Object> save(@RequestBody User user) {
         Map<String, Object> resultMap = new HashMap();
+        System.out.println(user.getUserName());
         userService.save(user);
         return resultMap;
     }
