@@ -18,6 +18,7 @@
         <module>cloud-provider-mail</module>
         <module>cloud-provider-material</module>
         <module>cloud-configuration</module>
+        <module>cloud-provider-redis</module>
     </modules>
 
     <properties>
