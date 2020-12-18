@@ -46,7 +46,7 @@ public class UserDao extends BaseDao {
      * @return
      */
     public List<User> findAll() {
-        String sql = "select * from user";
+        String sql = "select * from user order by id";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper(User.class));
     }
 

@@ -20,6 +20,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public void save(User user) {
         userDao.save(user);
+        //删除缓存
+        RedisUtil.delete("all");
     }
 
     @Override
@@ -33,7 +35,6 @@ public class UserServiceImpl implements UserService {
              userList = userDao.findAll();
             RedisStringUtil.set("all", userList);
         }
-        RedisUtil.delete("all");
         return userList;
     }
 
