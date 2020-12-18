@@ -22,11 +22,11 @@ public class RedisUtil implements ApplicationContextAware {
 
 
     private static RedisTemplate redisTemplate;
-
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        RedisUtil.redisTemplate = applicationContext.getBean(StringRedisTemplate.class);
+        RedisUtil.redisTemplate = (RedisTemplate)applicationContext.getBean("redisTemplate");
     }
+
     public static RedisTemplate getInstance(){
         return redisTemplate;
     }
@@ -119,7 +119,6 @@ public class RedisUtil implements ApplicationContextAware {
          *
          * @throws RedisSystemException
          *             如果redis中已存在同样的key, 且replace为false时，抛出此异常
-         * @date 2020/3/8 11:36:45
          */
         public static void restore(String key, byte[] value, long timeout, TimeUnit unit, boolean replace) {
             redisTemplate.restore(key, value, timeout, unit, replace);
@@ -131,7 +130,6 @@ public class RedisUtil implements ApplicationContextAware {
          * @param key
          *            指定的key
          * @return  是否存在对应的key-value
-         * @date 2020/3/8 12:16:46
          */
         public static boolean hasKey(String key) {
             Boolean result = redisTemplate.hasKey(key);
@@ -154,7 +152,6 @@ public class RedisUtil implements ApplicationContextAware {
          * @param unit
          *            timeout的单位
          * @return  操作是否成功
-         * @date 2020/3/8 12:18:58
          */
         public static boolean expire(String key, long timeout, TimeUnit unit) {
             Boolean result = redisTemplate.expire(key, timeout, unit);
@@ -176,7 +173,6 @@ public class RedisUtil implements ApplicationContextAware {
          *            啥时候过时
          *
          * @return  操作是否成功
-         * @date 2020/3/8 12:19:29
          */
         public static boolean expireAt(String key, Date date) {
             Boolean result = redisTemplate.expireAt(key, date);

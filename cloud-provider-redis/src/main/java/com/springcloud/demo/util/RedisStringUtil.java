@@ -24,16 +24,13 @@ public class RedisStringUtil {
 
         /**
          * 设置key-value
-         *
          * 注: 若已存在相同的key, 那么原来的key-value会被丢弃。
-         *
          * @param key
          *            key
          * @param value
          *            key对应的value
-         * @date 2020/3/8 15:40:59
          */
-        public static void set(String key, String value) {
+        public static void set(String key, Object value) {
             redisTemplate.opsForValue().set(key, value);
         }
 
@@ -84,7 +81,7 @@ public class RedisStringUtil {
          *            timeout的单位
          * @date 2020/3/8 15:40:59
          */
-        public static void setEx(String key, String value, long timeout, TimeUnit unit) {
+        public static void setEx(String key, Object value, long timeout, TimeUnit unit) {
             redisTemplate.opsForValue().set(key, value, timeout, unit);
         }
 

@@ -4,6 +4,8 @@ package com.springcloud.demo.service.impl;
 import com.springcloud.demo.entity.User;
 import com.springcloud.demo.service.UserService;
 import com.springcloud.demo.dao.UserDao;
+import com.springcloud.demo.util.RedisStringUtil;
+import com.springcloud.demo.util.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +24,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findAll() {
-        return userDao.findAll();
+        List<User> userList =null;
+        boolean flag = RedisUtil.hasKey("all");
+        if (flag){
+            System.out.println("缓存");
+            userList = (List<User>)RedisStringUtil.get("all");
+        }else {
+             userList = userDao.findAll();
+            RedisStringUtil.set("all", userList);
+        }
+        RedisUtil.delete("all");
+        return userList;
     }
 
     @Override

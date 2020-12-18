@@ -254,6 +254,6 @@ public class RedisLockUtil {
      */
     @Deprecated
     public static void releaseLock(final String key) {
-        RedisUtil.KeyOps.delete(key);
+        RedisUtil.delete(key);
     }
 }

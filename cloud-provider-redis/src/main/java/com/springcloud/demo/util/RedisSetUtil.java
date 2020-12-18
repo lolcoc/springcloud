@@ -1,12 +1,8 @@
 package com.springcloud.demo.util;
 
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.data.redis.core.Cursor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ScanOptions;
-import org.springframework.data.redis.core.StringRedisTemplate;
 
 import java.util.Collection;
 import java.util.List;
@@ -26,15 +22,12 @@ public class RedisSetUtil{
 
     /**
      * 向(key对应的)set中添加items
-     *
      * 注: 若key不存在，则会自动创建。
      * 注: set中的元素会去重。
-     *
      * @param key
      *            定位set的key
      * @param items
      *            要向(key对应的)set中添加的items
-     *
      * @return 此次添加操作,添加到set中的元素的个数
      * @date 2020/3/11 8:16:00
      */
@@ -164,7 +157,6 @@ public class RedisSetUtil{
      *            定位其中另一个set的键
      *
      * @return  item交集
-     * @date 2020/3/11 9:31:25
      */
     public static Set<String> sIntersect(String key, String otherKey) {
         Set<String> intersectResult = redisTemplate.opsForSet().intersect(key, otherKey);
@@ -502,7 +494,7 @@ public class RedisSetUtil{
      *                其中pattern中可以使用通配符 * ? 等,
      *                * 表示>=0个字符
      *                ？ 表示有且只有一个字符
-     *                此处的匹配规则与{@link RedisUtil.KeyOps#keys(String)}处的一样。
+     *                此处的匹配规则与{@link RedisUtil#keys(String)}处的一样。
      *
      * @return  匹配到的(key对应的)set中的项
      * @date 2020/3/9 10:49:27

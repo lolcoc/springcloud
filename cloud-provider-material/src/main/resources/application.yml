@@ -3,6 +3,3 @@ server:
 spring:
   application:
     name: cloud-provider-material
-  cloud:
-    zookeeper:
-      connect-string: 172.16.21.156:2181,172.16.21.156:2181,172.16.21.156:2181

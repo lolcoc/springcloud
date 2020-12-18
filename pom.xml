@@ -17,8 +17,10 @@
         <module>cloud-activemq-producer</module>
         <module>cloud-provider-mail</module>
         <module>cloud-provider-material</module>
-        <module>cloud-configuration</module>
+        <module>cloud-swagger-configuration</module>
         <module>cloud-provider-redis</module>
+        <module>cloud-datasource-configuration</module>
+        <module>cloud-zookeeper-configuration</module>
     </modules>
 
     <properties>
