@@ -71,10 +71,12 @@ public class UserController {
             flag = user.getPassWord().equals(passWord);
         }
         if (flag){
-            resultMap.put("success",user);
+            resultMap.put("code","success");
+            resultMap.put("data",user);
             return resultMap;
         }else {
-            resultMap.put("error","用户名或密码错误");
+            resultMap.put("code","error");
+            resultMap.put("data","用户名或密码错误！");
         }
         return resultMap;
 
