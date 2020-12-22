@@ -61,7 +61,8 @@ public class UserController {
      * @param passWord
      * @return
      */
-    @RequestMapping("/login")
+    @ResponseBody
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
     public Map<String, Object> login(String userName, String passWord) {
         Map<String, Object> resultMap = new HashMap<>(16);
         User user = userService.selectUserByName(userName);

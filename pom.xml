@@ -13,7 +13,6 @@
         <module>cloud-provider-user</module>
         <module>cloud-controller-user</module>
         <module>cloud-provider-eureka</module>
-        <module>cloud-html</module>
         <module>cloud-activemq-producer</module>
         <module>cloud-provider-mail</module>
         <module>cloud-provider-material</module>
@@ -21,6 +20,7 @@
         <module>cloud-provider-redis</module>
         <module>cloud-datasource-configuration</module>
         <module>cloud-zookeeper-configuration</module>
+        <module>cloud-filter-configuration</module>
     </modules>
 
     <properties>
